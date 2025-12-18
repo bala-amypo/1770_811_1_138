@@ -8,11 +8,12 @@ import jakarta.persistence.GenerationType;
 @Entity
 public class StudentEntity {
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     private String fullName;
     @Column(unique=true)
     private String email;
     private boolean verified;
     private boolean active = true;
-    
+
 }
