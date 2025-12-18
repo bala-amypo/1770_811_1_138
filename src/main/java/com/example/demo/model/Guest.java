@@ -25,7 +25,12 @@ public class Guest {
     this.fullName=fullName;
     this.email=email;
     this.phoneNumber=phoneNumber;
-    
+    this.verified=verified;
+    this.active=active;
+    this.role=role;
+    this.createdAt=createdAt;
+    }
+    public Guest(){
     }
 
     public void setEmail(String email){
