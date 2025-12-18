@@ -10,19 +10,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.entity.StudentEntity;
-import com.example.demo.service.StudentService;
+import com.example.demo.model.Guest;
+import com.example.demo.service.GuestService;
 
 
 @RestController
-public class StudentController {
+public class GuestController {
 
     @Autowired
-    StudentService ser;
+    GuestService ser;
 
-    @PostMapping("/addStudents")
-    public StudentEntity addStudents(@RequestBody StudentEntity student){
-        return ser.addStudents(student);
+    @PostMapping("/api/guests")
+    public Guest createguest(@RequestBody Guest guest){
+        return ser.createguest(guest);
     }
     
     @GetMapping("/getStudents")
