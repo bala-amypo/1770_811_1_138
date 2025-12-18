@@ -5,8 +5,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import java.time.LocalDateTime;
+import jakarta.persistence.Column;
+
 @Entity
-public class StudentEntity {
+public class Guest {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
@@ -18,6 +20,13 @@ public class StudentEntity {
     private boolean active = true;
     private String role;
     private LocalDateTime createdAt;
+
+    public Guest(String fullName,String email,String phoneNumber,boolean verified,boolean active,String role,LocalDateTime createdAt){
+    this.fullName=fullName;
+    this.email=email;
+    this.phoneNumber=phoneNumber;
+    
+    }
 
     public void setEmail(String email){
         this.email=email;
