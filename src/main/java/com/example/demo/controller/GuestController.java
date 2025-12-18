@@ -40,5 +40,14 @@ public class GuestController {
         return ser.updateguest(id);
     }
 
-    
+    @PutMapping("/api/guests/{id}/deactivate")
+    public String deactivateGuest(@PathVariable Long id) {
+        Guest guest = ser.getGuestById(id);
+        if (guest != null) {
+            ser.deactivateGuest(id);
+            return "Guest deactivated successfully.";
+        } else {
+            return "Guest not found.";
+        }
+    }
 }
