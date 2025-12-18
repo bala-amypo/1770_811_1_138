@@ -25,25 +25,20 @@ public class GuestController {
         return ser.createguest(guest);
     }
     
-    @GetMapping("/getStudents")
-    public List<StudentEntity> getStudents() {
-        return ser.getStudents();
+    @GetMapping("/api/guests")
+    public List<Guest> getguests() {
+        return ser.getguests();
     }
     
-    @GetMapping("/getStudent/{id}")
-    public StudentEntity getStudentById(@PathVariable Long id) {
-        return ser.getStudentById(id);
+    @GetMapping("/api/guests/{id}")
+    public Guest getGuestById(@PathVariable Long id) {
+        return ser.getGuestById(id);
     }
 
-    @DeleteMapping("/deleteStudent/{id}")
-    public String deleteStudentById(@PathVariable Long id) {
-        StudentEntity student = ser.getStudentById(id);
-        if(student!=null) {
-            ser.deleteStudentById(id);
-            return "Student deleted successfully.";
-        } else {
-            return "Student not found.";
-        }
+    @PutMapping("/api/guests/{id}")
+    public Guest updateguest(@PathVariable Long id){
+        return ser.updateguest(id);
     }
 
+    
 }
