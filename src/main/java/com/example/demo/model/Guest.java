@@ -13,7 +13,9 @@ public class StudentEntity {
     private String fullName;
     @Column(unique=true)
     private String email;
+    private String phoneNumber;
     private boolean verified;
     private boolean active = true;
-
+    private String role;
+    private LocalDateTime createdAt;
 }
