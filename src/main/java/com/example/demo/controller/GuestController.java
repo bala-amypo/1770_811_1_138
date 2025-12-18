@@ -21,13 +21,13 @@ public class GuestController {
     GuestService ser;
 
     @PostMapping("/api/guests")
-    public Guest createguest(@RequestBody Guest guest){
-        return ser.createguest(guest);
+    public Guest createGuest(@RequestBody Guest guest){
+        return ser.createGuest(guest);
     }
     
     @GetMapping("/api/guests")
-    public List<Guest> getguests() {
-        return ser.getguests();
+    public List<Guest> getGuests() {
+        return ser.getGuests();
     }
     
     @GetMapping("/api/guests/{id}")
