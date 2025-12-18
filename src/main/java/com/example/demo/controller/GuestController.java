@@ -3,12 +3,12 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import com.example.demo.model.Guest;
 import com.example.demo.service.GuestService;
@@ -36,9 +36,10 @@ public class GuestController {
     }
 
     @PutMapping("/api/guests/{id}")
-    public Guest updateguest(@PathVariable Long id){
-        return ser.updateguest(id);
+    public Guest updateguest(@PathVariable Long id, @RequestBody Guest guest) {
+        return ser.updateguest(id, guest);
     }
+
 
     @PutMapping("/api/guests/{id}/deactivate")
     public String deactivateGuest(@PathVariable Long id) {
