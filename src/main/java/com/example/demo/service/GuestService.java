@@ -8,7 +8,7 @@ public interface GuestService {
 
     public Guest createGuest(Guest guest);
 
-    public List<Guest> getAllGuests();
+    public List<Guest> getGuests();
 
     public Guest getGuestById(Long id);
 

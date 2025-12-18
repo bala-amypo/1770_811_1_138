@@ -21,7 +21,7 @@ public class GuestServiceImpl implements GuestService {
     }
 
     @Override
-    public List<Guest> getAllGuests() {
+    public List<Guest> getGuests() {
         return repo.findAll();
     }
 
