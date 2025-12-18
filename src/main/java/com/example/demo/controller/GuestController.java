@@ -36,8 +36,8 @@ public class GuestController {
     }
 
     @PutMapping("/api/guests/{id}")
-    public Guest updateguest(@PathVariable Long id, @RequestBody Guest guest) {
-        return ser.updateguest(id, guest);
+    public Guest updateGuest(@PathVariable Long id, @RequestBody Guest guest) {
+        return ser.updateGuest(id, guest);
     }
 
 

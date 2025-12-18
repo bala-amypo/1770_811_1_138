@@ -75,4 +75,8 @@ public class Guest {
     public LocalDateTime getCreatedAt(){
         return this.createdAt;
     }
+    public boolean isVerified() {
+    return verified;
+    }
+
 }
