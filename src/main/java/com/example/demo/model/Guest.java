@@ -31,10 +31,34 @@ public class StudentEntity {
     public void setVerified(boolean verified){
         this.verified=verified;
     }
-    public void setActuiv(String email){
-        this.email=email;
+    public void setActive(boolean active){
+        this.active=active;
     }
-    public void setEmail(String email){
-        this.email=email;
+    public void setRole(String role){
+        this.role=role;
+    }
+    public void setCreatedAt(LocalDateTime createdAt){
+        this.createdAt=createdAt;
+    }
+    public String getFullName(){
+        return this.fullName;
+    }
+    public String getEmail(){
+        return this.email;
+    }
+    public String getPhoneNumber(){
+        return this.phoneNumber;
+    }
+    public boolean getVerified(){
+        return this.verified;
+    }
+    public boolean getActive(){
+        return this.active;
+    }
+    public String getRole(){
+        return this.role;
+    }
+    public LocalDateTime getCreatedAt(){
+        return this.createdAt;
     }
 }
