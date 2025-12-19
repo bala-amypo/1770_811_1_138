@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import java.time.LocalDateTime;
 import jakarta.persistence.Column;
+import jakarta.persistence.PrePersist;
 
 @Entity
 public class Guest {
@@ -20,6 +21,10 @@ public class Guest {
     private boolean active = true;
     private String role;
     private LocalDateTime createdAt;
+    @PrePersist
+    public setLocalDateTime(){
+        this.LocalDateTime = LocalDateTime.now();
+    }
 
     public Guest(String fullName,String email,String phoneNumber,boolean verified,boolean active,String role,LocalDateTime createdAt){
     this.fullName=fullName;
