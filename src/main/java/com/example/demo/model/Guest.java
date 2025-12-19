@@ -49,6 +49,9 @@ public class Guest {
     public void setVerified(boolean verified){
         this.verified=verified;
     }
+    public void setActive(boolean active){
+        this.active=active;
+    }
     public void setRole(String role){
         this.role=role;
     }
@@ -77,7 +80,7 @@ public class Guest {
         return this.createdAt;
     }
     public boolean isVerified() {
-    return this.verified;
+    return verified;
     }
 
 }
