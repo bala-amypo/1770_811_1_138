@@ -26,7 +26,7 @@ public class Guest {
         this.createdAt = LocalDateTime.now();
     }
 
-    public Guest(String fullName,String email,String phoneNumber,boolean verified,boolean active,String role,LocalDateTime createdAt){
+    public Guest(String fullName,String email,String phoneNumber,boolean verified,boolean active,String role){
     this.fullName=fullName;
     this.email=email;
     this.phoneNumber=phoneNumber;
@@ -48,9 +48,6 @@ public class Guest {
     }
     public void setVerified(boolean verified){
         this.verified=verified;
-    }
-    public void setActive(boolean active){
-        this.active=active;
     }
     public void setRole(String role){
         this.role=role;
@@ -80,7 +77,7 @@ public class Guest {
         return this.createdAt;
     }
     public boolean isVerified() {
-    return verified;
+    return this.verified;
     }
 
 }
