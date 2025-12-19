@@ -22,8 +22,8 @@ public class Guest {
     private String role;
     private LocalDateTime createdAt;
     @PrePersist
-    public setLocalDateTime(){
-        this.LocalDateTime = LocalDateTime.now();
+    public void setLocalDateTime(){
+        this.createdAt = LocalDateTime.now();
     }
 
     public Guest(String fullName,String email,String phoneNumber,boolean verified,boolean active,String role,LocalDateTime createdAt){
@@ -33,7 +33,6 @@ public class Guest {
     this.verified=verified;
     this.active=active;
     this.role=role;
-    this.createdAt=createdAt;
     }
     public Guest(){
     }
