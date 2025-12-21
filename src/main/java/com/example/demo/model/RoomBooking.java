@@ -6,6 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Entity;
+import java.util.*;
 @Entity
 public class RoomBooking {
     @Id
@@ -17,7 +18,7 @@ public class RoomBooking {
     private LocalDate checkOutDate;
     private boolean  active = true;
     @ManyToMany
-    private Guest roommates;
+    private List<Guest> roommates;
 
     public RoomBooking(LocalDate checkInDate, LocalDate checkOutDate, Guest guest, Long id, String roomNumber, Guest roommates) {
         if(checkInDate.isAfter(checkOutDate)){
