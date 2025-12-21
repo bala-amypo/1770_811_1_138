@@ -12,7 +12,7 @@ public interface RoomBookingService {
 
     RoomBooking getBookingById(Long id);
 
-    List<RoomBooking> getBookingsByGuests(Long guestid);
+    List<RoomBooking> getBookingsByGuest(Long guestid);
 
-    void deactivateBooking(Long id);
+    RoomBooking deactivateBooking(Long id);
 }

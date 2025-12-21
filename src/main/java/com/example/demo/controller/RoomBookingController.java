@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.HotelRoomKeyDigitalShare.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,8 +32,8 @@ public class RoomBookingController {
         return ser.getBookingById(id);
     }
     @GetMapping("/api/bookings/guests/{guestId}")
-    public List<RoomBooking> getBookingsByGuests(@PathVariable Long guestid){
-        return ser.getBookingsByGuests(guestid);
+    public List<RoomBooking> getBookingsByGuest(@PathVariable Long guestid){
+        return ser.getBookingsByGuest(guestid);
     }
     @PutMapping("/api/bookings/{id}/deactivate")
     public String deactivateBooking(@PathVariable Long id){
