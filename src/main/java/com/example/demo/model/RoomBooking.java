@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Entity;
 @Entity
 public class RoomBooking {
     @Id
