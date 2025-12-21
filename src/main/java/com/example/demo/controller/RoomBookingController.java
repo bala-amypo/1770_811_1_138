@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.model.RoomBooking;
 import com.example.demo.service.RoomBookingService;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 @RestController
@@ -32,8 +32,8 @@ public class RoomBookingController {
         return ser.getBookingById(id);
     }
     @GetMapping("/api/bookings/guests/{guestId}")
-    public List<RoomBooking> getBookingsByGuest(@PathVariable Long guestid){
-        return ser.getBookingsByGuest(guestid);
+    public List<RoomBooking> getBookingsByGuest(@PathVariable Long guestId){
+        return ser.getBookingsByGuest(guestId);
     }
     @PutMapping("/api/bookings/{id}/deactivate")
     public String deactivateBooking(@PathVariable Long id){
