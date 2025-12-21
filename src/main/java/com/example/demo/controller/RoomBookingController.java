@@ -1,49 +1,42 @@
 package com.example.demo.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.example.demo.model.RoomBooking;
 import com.example.demo.service.RoomBookingService;
-
-import org.springframework.web.bind.annotation.RequestBody;
-
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
+
 @RestController
+@RequestMapping("/api/bookings")
 public class RoomBookingController {
-    @Autowired
-    RoomBookingService ser;
 
-    @PostMapping("/api/bookings")
-    public RoomBooking createBooking(@RequestBody RoomBooking roombooking){
-        return ser.createBooking(roombooking);
+    private final RoomBookingService service;
+
+    public RoomBookingController(RoomBookingService service) {
+        this.service = service;
     }
 
-    @PutMapping("/api/bookings/{id}")
-    public RoomBooking updateBooking(@PathVariable Long id,@RequestBody RoomBooking roombooking){
-        return ser.updateBooking(id,roombooking);
+    @PostMapping
+    public RoomBooking create(@RequestBody RoomBooking booking) {
+        return service.createBooking(booking);
     }
-    @GetMapping("/api/bookings/{id}")
-    public RoomBooking getBookingById(@PathVariable Long id) {
-        return ser.getBookingById(id);
+
+    @PutMapping("/{id}")
+    public RoomBooking update(@PathVariable Long id, @RequestBody RoomBooking booking) {
+        return service.updateBooking(id, booking);
     }
-    @GetMapping("/api/bookings/guests/{guestId}")
-    public List<RoomBooking> getBookingsByGuest(@PathVariable Long guestId){
-        return ser.getBookingsByGuest(guestId);
+
+    @GetMapping("/{id}")
+    public RoomBooking get(@PathVariable Long id) {
+        return service.getBookingById(id);
     }
-    @PutMapping("/api/bookings/{id}/deactivate")
-    public String deactivateBooking(@PathVariable Long id){
-        RoomBooking booking = ser.getBookingById(id);
-        if(booking!=null){
-            ser.deactivateBooking(id);
-            return "Booking deactivated successfully";
-        }else{
-            return "Booking not found";
-        }
+
+    @GetMapping("/guest/{guestId}")
+    public List<RoomBooking> byGuest(@PathVariable Long guestId) {
+        return service.getBookingsForGuest(guestId);
+    }
+
+    @PutMapping("/{id}/deactivate")
+    public void deactivate(@PathVariable Long id) {
+        service.deactivateBooking(id);
     }
 }
-

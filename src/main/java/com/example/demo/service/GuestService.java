@@ -1,18 +1,17 @@
 package com.example.demo.service;
 
-import java.util.List;
-
 import com.example.demo.model.Guest;
+import java.util.List;
 
 public interface GuestService {
 
-    public Guest createGuest(Guest guest);
+    Guest createGuest(Guest guest);
 
-    public List<Guest> getGuests();
+    Guest updateGuest(Long id, Guest guest);
 
-    public Guest getGuestById(Long id);
+    Guest getGuestById(Long id);
 
-    public Guest updateGuest(Long id, Guest guest);
+    List<Guest> getAllGuests();
 
-    public Guest deactivateGuest(Long id);
+    void deactivateGuest(Long id);
 }

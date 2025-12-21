@@ -1,54 +1,42 @@
 package com.example.demo.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PutMapping;
-
 import com.example.demo.model.Guest;
 import com.example.demo.service.GuestService;
-
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
+@RequestMapping("/api/guests")
 public class GuestController {
 
-    @Autowired
-    GuestService ser;
+    private final GuestService service;
 
-    @PostMapping("/api/guests")
-    public Guest createGuest(@RequestBody Guest guest){
-        return ser.createGuest(guest);
-    }
-    
-    @GetMapping("/api/guests")
-    public List<Guest> getGuests() {
-        return ser.getGuests();
-    }
-    
-    @GetMapping("/api/guests/{id}")
-    public Guest getGuestById(@PathVariable Long id) {
-        return ser.getGuestById(id);
+    public GuestController(GuestService service) {
+        this.service = service;
     }
 
-    @PutMapping("/api/guests/{id}")
-    public Guest updateGuest(@PathVariable Long id, @RequestBody Guest guest) {
-        return ser.updateGuest(id, guest);
+    @PostMapping
+    public Guest create(@RequestBody Guest guest) {
+        return service.createGuest(guest);
     }
 
+    @PutMapping("/{id}")
+    public Guest update(@PathVariable Long id, @RequestBody Guest guest) {
+        return service.updateGuest(id, guest);
+    }
 
-    @PutMapping("/api/guests/{id}/deactivate")
-    public String deactivateGuest(@PathVariable Long id) {
-        Guest guest = ser.getGuestById(id);
-        if (guest != null) {
-            ser.deactivateGuest(id);
-            return "Guest deactivated successfully.";
-        } else {
-            return "Guest not found.";
-        }
+    @GetMapping("/{id}")
+    public Guest get(@PathVariable Long id) {
+        return service.getGuestById(id);
+    }
+
+    @GetMapping
+    public List<Guest> all() {
+        return service.getAllGuests();
+    }
+
+    @PutMapping("/{id}/deactivate")
+    public void deactivate(@PathVariable Long id) {
+        service.deactivateGuest(id);
     }
 }
