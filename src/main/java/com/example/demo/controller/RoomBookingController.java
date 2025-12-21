@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.RoomBooking;
-import com.example.HotelRoomKeyD.service.RoomBookingService;
+import com.example.demo.service.RoomBookingService;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
