@@ -4,9 +4,11 @@ import com.example.demo.model.Guest;
 import com.example.demo.repository.GuestRepository;
 import com.example.demo.service.GuestService;
 import com.example.demo.exception.ResourceNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class GuestServiceImpl implements GuestService {
 
     private final GuestRepository repo;
