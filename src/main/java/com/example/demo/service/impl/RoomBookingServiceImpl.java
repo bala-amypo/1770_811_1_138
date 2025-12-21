@@ -11,44 +11,47 @@ import java.util.List;
 @Service
 public class RoomBookingServiceImpl implements RoomBookingService {
 
-    private final RoomBookingRepository repo;
+    private final RoomBookingRepository bookingRepo;
 
-    public RoomBookingServiceImpl(RoomBookingRepository repo) {
-        this.repo = repo;
+    public RoomBookingServiceImpl(RoomBookingRepository bookingRepo) {
+        this.bookingRepo = bookingRepo;
     }
 
     @Override
     public RoomBooking createBooking(RoomBooking booking) {
+
         if (booking.getCheckInDate().isAfter(booking.getCheckOutDate())) {
             throw new IllegalArgumentException("Check-in must be before check-out");
         }
-        return repo.save(booking);
+
+        // BASIC CRUD ONLY (as taught)
+        return bookingRepo.save(booking);
     }
 
     @Override
     public RoomBooking updateBooking(Long id, RoomBooking booking) {
-        RoomBooking b = getBookingById(id);
-        b.setRoomNumber(booking.getRoomNumber());
-        b.setCheckInDate(booking.getCheckInDate());
-        b.setCheckOutDate(booking.getCheckOutDate());
-        return repo.save(b);
+        RoomBooking existing = getBookingById(id);
+        existing.setRoomNumber(booking.getRoomNumber());
+        existing.setCheckInDate(booking.getCheckInDate());
+        existing.setCheckOutDate(booking.getCheckOutDate());
+        return bookingRepo.save(existing);
     }
 
     @Override
     public RoomBooking getBookingById(Long id) {
-        return repo.findById(id)
+        return bookingRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Booking not found"));
     }
 
     @Override
     public List<RoomBooking> getBookingsForGuest(Long guestId) {
-        return repo.findByGuestId(guestId);
+        return bookingRepo.findByGuestId(guestId);
     }
 
     @Override
     public void deactivateBooking(Long id) {
-        RoomBooking b = getBookingById(id);
-        b.setActive(false);
-        repo.save(b);
+        RoomBooking booking = getBookingById(id);
+        booking.setActive(false);
+        bookingRepo.save(booking);
     }
 }
