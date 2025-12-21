@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import java.time.LocalDate;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 
@@ -24,6 +25,7 @@ public class RoomBooking {
     private boolean active = true;
 
     @ManyToMany
+    @JsonIgnore
     private List<Guest> roommates;
 
     public RoomBooking() {
