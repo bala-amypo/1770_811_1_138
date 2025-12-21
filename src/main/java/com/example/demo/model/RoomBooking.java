@@ -1,46 +1,56 @@
 package com.example.demo.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Entity;
-import java.util.*;
+import jakarta.persistence.*;
+
 @Entity
 public class RoomBooking {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne
     private Guest guest;
+
     private String roomNumber;
+
     private LocalDate checkInDate;
+
     private LocalDate checkOutDate;
-    private boolean  active = true;
+
+    private boolean active = true;
+
     @ManyToMany
     private List<Guest> roommates;
-
-    public RoomBooking(LocalDate checkInDate, LocalDate checkOutDate, Guest guest, Long id, String roomNumber, Guest roommates) {
-        if(checkInDate.isAfter(checkOutDate)){
-            throw new IllegalArgumentException("checkIndate must be before checkout date");
-        }
-        this.checkInDate = checkInDate;
-        this.checkOutDate = checkOutDate;
-        this.guest = guest;
-        this.id = id;
-        this.roomNumber = roomNumber;
-        this.roommates = roommates;
-    }
 
     public RoomBooking() {
     }
 
-    public Long getId() {
-        return id;
+    public RoomBooking(
+            LocalDate checkInDate,
+            LocalDate checkOutDate,
+            Guest guest,
+            String roomNumber,
+            List<Guest> roommates) {
+
+        if (checkInDate.isAfter(checkOutDate)) {
+            throw new IllegalArgumentException(
+                "checkInDate must be before checkOutDate"
+            );
+        }
+
+        this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
+        this.guest = guest;
+        this.roomNumber = roomNumber;
+        this.roommates = roommates;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getId() {
+        return id;
     }
 
     public Guest getGuest() {
@@ -83,13 +93,11 @@ public class RoomBooking {
         this.active = active;
     }
 
-    public Guest getRoommates() {
+    public List<Guest> getRoommates() {
         return roommates;
     }
 
-    public void setRoommates(Guest roommates) {
+    public void setRoommates(List<Guest> roommates) {
         this.roommates = roommates;
     }
-
 }
-
