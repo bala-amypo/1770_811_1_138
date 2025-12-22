@@ -29,7 +29,11 @@ public class RoomBookingServiceImpl implements RoomBookingService {
             throw new IllegalArgumentException("Check-in must be before check-out");
         }
 
-        Guest guest = guestRepo.findById(booking.getGuestId())
+        if (booking.getGuest() == null || booking.getGuest().getId() == null) {
+            throw new IllegalArgumentException("Guest is required");
+        }
+
+        Guest guest = guestRepo.findById(booking.getGuest().getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Guest not found"));
 
         booking.setGuest(guest);
