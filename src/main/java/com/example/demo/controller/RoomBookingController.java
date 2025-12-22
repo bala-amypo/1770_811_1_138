@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import com.example.demo.model.RoomBooking;
 import com.example.demo.service.RoomBookingService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.List;
 
 @RestController

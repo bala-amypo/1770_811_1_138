@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import com.example.demo.model.DigitalKey;
 import com.example.demo.service.DigitalKeyService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.List;
 
 @RestController

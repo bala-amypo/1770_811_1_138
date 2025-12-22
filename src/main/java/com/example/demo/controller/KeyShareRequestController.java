@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import com.example.demo.model.KeyShareRequest;
 import com.example.demo.service.KeyShareRequestService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.List;
 
 @RestController
