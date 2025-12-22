@@ -9,11 +9,8 @@ import java.util.List;
 @RequestMapping("/api/access-logs")
 public class AccessLogController {
 
-    private final AccessLogService service;
-
-    public AccessLogController(AccessLogService service) {
-        this.service = service;
-    }
+     @Autowired
+     AccessLogService service;
 
     @PostMapping
     public AccessLog create(@RequestBody AccessLog log) {

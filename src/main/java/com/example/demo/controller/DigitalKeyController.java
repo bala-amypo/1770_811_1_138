@@ -9,11 +9,8 @@ import java.util.List;
 @RequestMapping("/api/digital-keys")
 public class DigitalKeyController {
 
-    private final DigitalKeyService service;
-
-    public DigitalKeyController(DigitalKeyService service) {
-        this.service = service;
-    }
+     @Autowired
+     DigitalKeyService service;
 
     @PostMapping("/generate/{bookingId}")
     public DigitalKey generate(@PathVariable Long bookingId) {

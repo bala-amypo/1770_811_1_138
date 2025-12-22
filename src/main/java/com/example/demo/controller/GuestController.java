@@ -9,11 +9,8 @@ import java.util.List;
 @RequestMapping("/api/guests")
 public class GuestController {
 
-    private final GuestService service;
-
-    public GuestController(GuestService service) {
-        this.service = service;
-    }
+     @Autowired
+     GuestService service;
 
     @PostMapping
     public Guest create(@RequestBody Guest guest) {

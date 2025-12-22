@@ -10,7 +10,7 @@ import java.util.List;
 public class RoomBookingController {
 
     @Autowired
-    
+    RoomBookingService service;
 
     @PostMapping
     public RoomBooking create(@RequestBody RoomBooking booking) {

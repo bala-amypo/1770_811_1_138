@@ -9,11 +9,8 @@ import java.util.List;
 @RequestMapping("/api/key-share")
 public class KeyShareRequestController {
 
-    private final KeyShareRequestService service;
-
-    public KeyShareRequestController(KeyShareRequestService service) {
-        this.service = service;
-    }
+     @Autowired
+     KeyShareRequestService service;
 
     @PostMapping
     public KeyShareRequest create(@RequestBody KeyShareRequest request) {
