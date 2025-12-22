@@ -9,11 +9,8 @@ import java.util.List;
 @RequestMapping("/api/bookings")
 public class RoomBookingController {
 
-    private final RoomBookingService service;
-
-    public RoomBookingController(RoomBookingService service) {
-        this.service = service;
-    }
+    @Autowired
+    
 
     @PostMapping
     public RoomBooking create(@RequestBody RoomBooking booking) {
