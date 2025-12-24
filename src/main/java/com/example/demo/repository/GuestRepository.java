@@ -5,5 +5,9 @@ import com.example.demo.model.Guest;
 import java.util.Optional;
 
 public interface GuestRepository extends JpaRepository<Guest, Long> {
+
     Optional<Guest> findByEmail(String email);
+
+    // REQUIRED BY TESTS
+    boolean existsByEmail(String email);
 }

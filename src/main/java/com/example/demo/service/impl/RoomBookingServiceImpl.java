@@ -37,7 +37,6 @@ public class RoomBookingServiceImpl implements RoomBookingService {
                 .orElseThrow(() -> new ResourceNotFoundException("Guest not found"));
 
         booking.setGuest(guest);
-
         return bookingRepo.save(booking);
     }
 
