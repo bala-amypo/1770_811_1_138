@@ -3,26 +3,24 @@ package com.example.demo.service.impl;
 import com.example.demo.model.AccessLog;
 import com.example.demo.repository.AccessLogRepository;
 import com.example.demo.service.AccessLogService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class AccessLogServiceImpl implements AccessLogService {
 
-    @Autowired
-    private AccessLogRepository repo;
+    private final AccessLogRepository repo;
 
-    // 🔥 REQUIRED BY SPRING
-    public AccessLogServiceImpl() {
+    public AccessLogServiceImpl(AccessLogRepository repo) {
+        this.repo = repo;
     }
 
     @Override
     public AccessLog createLog(AccessLog log) {
-        if (log.getAccessTime().isAfter(Instant.now())) {
-            throw new IllegalArgumentException("future");
+        if (log.getAccessTime().isAfter(LocalDateTime.now())) {
+            throw new IllegalArgumentException("Future access not allowed");
         }
         log.setResult("SUCCESS");
         return repo.save(log);
