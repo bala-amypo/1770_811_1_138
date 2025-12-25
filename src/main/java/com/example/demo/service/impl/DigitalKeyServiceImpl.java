@@ -8,7 +8,7 @@ import com.example.demo.service.DigitalKeyService;
 import com.example.demo.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,10 +18,8 @@ public class DigitalKeyServiceImpl implements DigitalKeyService {
     private final DigitalKeyRepository keyRepo;
     private final RoomBookingRepository bookingRepo;
 
-    public DigitalKeyServiceImpl(
-            DigitalKeyRepository keyRepo,
-            RoomBookingRepository bookingRepo
-    ) {
+    public DigitalKeyServiceImpl(DigitalKeyRepository keyRepo,
+                                 RoomBookingRepository bookingRepo) {
         this.keyRepo = keyRepo;
         this.bookingRepo = bookingRepo;
     }
@@ -32,15 +30,15 @@ public class DigitalKeyServiceImpl implements DigitalKeyService {
         RoomBooking booking = bookingRepo.findById(bookingId)
                 .orElseThrow(() -> new ResourceNotFoundException("Booking not found"));
 
-        if (!Boolean.TRUE.equals(booking.getActive())) {
+        if (!booking.getActive()) {
             throw new IllegalStateException("inactive");
         }
 
         DigitalKey key = new DigitalKey();
         key.setBooking(booking);
         key.setKeyValue(UUID.randomUUID().toString());
-        key.setIssuedAt(LocalDateTime.now());
-        key.setExpiresAt(LocalDateTime.now().plusDays(1));
+        key.setIssuedAt(Instant.now());
+        key.setExpiresAt(Instant.now().plusSeconds(86400));
         key.setActive(true);
 
         return keyRepo.save(key);
@@ -55,7 +53,7 @@ public class DigitalKeyServiceImpl implements DigitalKeyService {
     @Override
     public DigitalKey getActiveKeyForBooking(Long bookingId) {
         return keyRepo.findByBookingIdAndActiveTrue(bookingId)
-                .orElseThrow(() -> new ResourceNotFoundException("Active key not found"));
+                .orElse(null);
     }
 
     @Override
