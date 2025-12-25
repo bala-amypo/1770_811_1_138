@@ -15,13 +15,13 @@ public class GuestServiceImpl implements GuestService {
     private final GuestRepository repo;
     private final PasswordEncoder passwordEncoder;
 
-    // ORIGINAL CONSTRUCTOR (used by Spring)
+    // Used by Spring
     public GuestServiceImpl(GuestRepository repo) {
         this.repo = repo;
         this.passwordEncoder = null;
     }
 
-    // 🔥 REQUIRED FOR TESTS
+    // 🔥 Used by tests
     public GuestServiceImpl(GuestRepository repo, PasswordEncoder passwordEncoder) {
         this.repo = repo;
         this.passwordEncoder = passwordEncoder;
@@ -44,5 +44,13 @@ public class GuestServiceImpl implements GuestService {
     @Override
     public List<Guest> getAllGuests() {
         return repo.findAll();
+    }
+
+    // ✅ REQUIRED BY INTERFACE
+    @Override
+    public void deactivateGuest(Long id) {
+        Guest guest = getGuestById(id);
+        guest.setActive(false);
+        repo.save(guest);
     }
 }
