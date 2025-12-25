@@ -28,6 +28,18 @@ public class AccessLogServiceImpl implements AccessLogService {
         this.digitalKeyRepository = digitalKeyRepository;
         this.guestRepository = guestRepository;
     }
+    // REQUIRED BY TESTS
+public AccessLogServiceImpl(
+        AccessLogRepository repo,
+        DigitalKeyRepository digitalKeyRepository,
+        GuestRepository guestRepository,
+        KeyShareRequestRepository keyShareRequestRepository
+) {
+    this.repo = repo;
+    this.digitalKeyRepository = digitalKeyRepository;
+    this.guestRepository = guestRepository;
+}
+
 
     @Override
     public AccessLog createLog(AccessLog log) {
