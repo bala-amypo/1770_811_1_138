@@ -48,6 +48,24 @@ public class GuestServiceImpl implements GuestService {
 
     // ✅ REQUIRED BY INTERFACE
     @Override
+    public Guest updateGuest(Long id, Guest guest) {
+        Guest existing = getGuestById(id);
+
+        existing.setFullName(guest.getFullName());
+        existing.setEmail(guest.getEmail());
+        existing.setPhoneNumber(guest.getPhoneNumber());
+        existing.setRole(guest.getRole());
+        existing.setVerified(guest.getVerified());
+
+        if (guest.getPassword() != null && passwordEncoder != null) {
+            existing.setPassword(passwordEncoder.encode(guest.getPassword()));
+        }
+
+        return repo.save(existing);
+    }
+
+    // ✅ REQUIRED BY INTERFACE
+    @Override
     public void deactivateGuest(Long id) {
         Guest guest = getGuestById(id);
         guest.setActive(false);
