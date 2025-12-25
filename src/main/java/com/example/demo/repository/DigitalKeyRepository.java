@@ -6,7 +6,8 @@ import java.util.List;
 
 public interface DigitalKeyRepository extends JpaRepository<DigitalKey, Long> {
 
-    DigitalKey findByBookingIdAndActiveTrue(Long bookingId);
+    Optional<DigitalKey> findByBookingIdAndActiveTrue(Long bookingId);
+
 
     List<DigitalKey> findByBookingGuestId(Long guestId);
 }

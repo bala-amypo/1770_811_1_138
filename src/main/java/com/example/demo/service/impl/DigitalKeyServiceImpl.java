@@ -18,8 +18,10 @@ public class DigitalKeyServiceImpl implements DigitalKeyService {
     private final DigitalKeyRepository keyRepo;
     private final RoomBookingRepository bookingRepo;
 
-    public DigitalKeyServiceImpl(DigitalKeyRepository keyRepo,
-                                 RoomBookingRepository bookingRepo) {
+    public DigitalKeyServiceImpl(
+            DigitalKeyRepository keyRepo,
+            RoomBookingRepository bookingRepo
+    ) {
         this.keyRepo = keyRepo;
         this.bookingRepo = bookingRepo;
     }
@@ -30,7 +32,7 @@ public class DigitalKeyServiceImpl implements DigitalKeyService {
         RoomBooking booking = bookingRepo.findById(bookingId)
                 .orElseThrow(() -> new ResourceNotFoundException("Booking not found"));
 
-        if (!booking.getActive()) {
+        if (!Boolean.TRUE.equals(booking.getActive())) {
             throw new IllegalStateException("inactive");
         }
 
@@ -52,7 +54,8 @@ public class DigitalKeyServiceImpl implements DigitalKeyService {
 
     @Override
     public DigitalKey getActiveKeyForBooking(Long bookingId) {
-        return keyRepo.findByBookingIdAndActiveTrue(bookingId);
+        return keyRepo.findByBookingIdAndActiveTrue(bookingId)
+                .orElseThrow(() -> new ResourceNotFoundException("Active key not found"));
     }
 
     @Override
