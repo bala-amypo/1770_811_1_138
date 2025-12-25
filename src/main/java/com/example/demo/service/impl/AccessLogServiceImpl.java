@@ -5,6 +5,7 @@ import com.example.demo.repository.AccessLogRepository;
 import com.example.demo.repository.DigitalKeyRepository;
 import com.example.demo.repository.GuestRepository;
 import com.example.demo.service.AccessLogService;
+import com.example.demo.repository.KeyShareRequestRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
