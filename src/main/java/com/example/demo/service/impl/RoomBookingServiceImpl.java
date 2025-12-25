@@ -21,6 +21,12 @@ public class RoomBookingServiceImpl implements RoomBookingService {
         this.bookingRepo = bookingRepo;
         this.guestRepo = guestRepo;
     }
+    // REQUIRED BY TESTS
+    public RoomBookingServiceImpl(RoomBookingRepository bookingRepo) {
+        this.bookingRepo = bookingRepo;
+        this.guestRepo = null;
+}
+
 
     @Override
     public RoomBooking createBooking(RoomBooking booking) {
