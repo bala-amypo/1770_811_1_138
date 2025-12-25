@@ -1,7 +1,9 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @Entity
 @Table(name = "key_share_requests")
@@ -20,13 +22,10 @@ public class KeyShareRequest {
     @ManyToOne
     private Guest sharedWith;
 
-    // 🔥 REQUIRED BY SERVICE + TESTS
     private LocalDateTime shareStart;
     private LocalDateTime shareEnd;
 
-    // 🔥 REQUIRED BY SERVICE + TESTS
     private String status;
-
     private LocalDateTime createdAt;
 
     @PrePersist
@@ -34,72 +33,28 @@ public class KeyShareRequest {
         this.createdAt = LocalDateTime.now();
     }
 
-    // ---------- getters & setters ----------
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public DigitalKey getDigitalKey() {
-        return digitalKey;
-    }
-
-    public void setDigitalKey(DigitalKey digitalKey) {
-        this.digitalKey = digitalKey;
-    }
-
-    public Guest getSharedBy() {
-        return sharedBy;
-    }
-
-    public void setSharedBy(Guest sharedBy) {
-        this.sharedBy = sharedBy;
-    }
-
-    public Guest getSharedWith() {
-        return sharedWith;
-    }
-
-    public void setSharedWith(Guest sharedWith) {
-        this.sharedWith = sharedWith;
-    }
-
-    // 🔥 REQUIRED
-    public LocalDateTime getShareStart() {
-        return shareStart;
-    }
+    public LocalDateTime getShareStart() { return shareStart; }
 
     public void setShareStart(LocalDateTime shareStart) {
         this.shareStart = shareStart;
     }
 
-    // 🔥 REQUIRED
-    public LocalDateTime getShareEnd() {
-        return shareEnd;
+    // 🔥 TEST
+    public void setShareStart(Instant shareStart) {
+        this.shareStart = LocalDateTime.ofInstant(shareStart, ZoneId.systemDefault());
     }
+
+    public LocalDateTime getShareEnd() { return shareEnd; }
 
     public void setShareEnd(LocalDateTime shareEnd) {
         this.shareEnd = shareEnd;
     }
 
-    // 🔥 REQUIRED
-    public String getStatus() {
-        return status;
+    // 🔥 TEST
+    public void setShareEnd(Instant shareEnd) {
+        this.shareEnd = LocalDateTime.ofInstant(shareEnd, ZoneId.systemDefault());
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 }
