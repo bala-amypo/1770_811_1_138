@@ -27,14 +27,11 @@ public class AuthController {
         this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
     }
-
-    // ✅ REGISTER
     @PostMapping("/register")
     public ResponseEntity<Guest> register(@RequestBody Guest guest) {
         return ResponseEntity.ok(guestService.createGuest(guest));
     }
 
-    // ✅ LOGIN
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> request) {
 
