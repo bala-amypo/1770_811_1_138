@@ -11,9 +11,10 @@ import java.util.List;
 public class GuestServiceImpl implements GuestService {
 
     private final GuestRepository repo;
-
-    public GuestServiceImpl(GuestRepository repo) {
+    private final PasswordEncoder passwordEncoder;
+    public GuestServiceImpl(GuestRepository repo,PasswordEncoder passwordEncoder) {
         this.repo = repo;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
