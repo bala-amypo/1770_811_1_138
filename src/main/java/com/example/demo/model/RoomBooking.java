@@ -21,6 +21,8 @@ public class RoomBooking {
     private LocalDate checkOutDate;
 
     private Boolean active = true;
+    @ManytoMany 
+    private Set<Guest> roommates = new Hashset<>()
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

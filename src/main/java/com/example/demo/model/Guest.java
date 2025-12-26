@@ -1,7 +1,7 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Entity
 @Table(
@@ -26,11 +26,11 @@ public class Guest {
     private Boolean active = true;
     private String role;
 
-    private LocalDateTime createdAt;
+    private Instant createdAt;
 
     @PrePersist
     public void onCreate() {
-        this.createdAt = LocalDateTime.now();
+        this.createdAt = Instant.now();
     }
 
     public Long getId() { return id; }
@@ -43,7 +43,7 @@ public class Guest {
     public void setEmail(String email) { this.email = email; }
 
     public String getPassword() { return password; }
-    public void setEmail(String email) { this.email = email; }
+    public void setPassword(String password) { this.password = password; }
 
     public String getPhoneNumber() { return phoneNumber; }
     public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
