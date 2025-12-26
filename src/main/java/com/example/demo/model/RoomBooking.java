@@ -2,6 +2,8 @@ package com.example.demo.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
+import java.util.HashSet;
 
 @Entity
 @Table(name = "room_bookings")
@@ -21,10 +23,10 @@ public class RoomBooking {
     private LocalDate checkOutDate;
 
     private Boolean active = true;
-    @ManytoMany 
+    @ManyToMany 
     @JoinTable(
-    name = "roommates_booking",)
-    private Set<Guest> roommates = new Hashset<>()
+    name = "roommates_booking",joinColumns=@JoinColumn(name="booking_id"),inverseJoinColumns=@JoinColumn(name="roommates_guest_id"))
+    private Set<Guest> roommates = new HashSet<>();
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -43,4 +45,6 @@ public class RoomBooking {
 
     public Boolean getActive() { return active; }
     public void setActive(Boolean active) { this.active = active; }
+
+    public 
 }
