@@ -1,9 +1,18 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
 import java.time.LocalDate;
-import java.util.Set;
 import java.util.HashSet;
+import java.util.Set;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "room_bookings")
@@ -28,6 +37,17 @@ public class RoomBooking {
     name = "roommates_booking",joinColumns=@JoinColumn(name="booking_id"),inverseJoinColumns=@JoinColumn(name="roommates_guest_id"))
     private Set<Guest> roommates = new HashSet<>();
 
+    public RoomBooking(LocalDate checkInDate, LocalDate checkOutDate, Guest guest, Long id, String roomNumber) {
+        this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
+        this.guest = guest;
+        this.id = id;
+        this.roomNumber = roomNumber;
+    }
+
+    public RoomBooking() {
+    }
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -49,4 +69,8 @@ public class RoomBooking {
     public  Set<Guest> getRoommates(){
         return roommates;
         }
+
+    public void setRoommates(Set<Guest> roommates) {
+        this.roommates = roommates;
+    }
 }

@@ -1,7 +1,15 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
 import java.time.Instant;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 @Entity
 @Table(
@@ -27,6 +35,19 @@ public class Guest {
     private String role;
 
     private Instant createdAt;
+
+    public Guest(Instant createdAt, String email, String fullName, Long id, String password, String phoneNumber, String role) {
+        this.createdAt = createdAt;
+        this.email = email;
+        this.fullName = fullName;
+        this.id = id;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.role = role;
+    }
+
+    public Guest() {
+    }
 
     @PrePersist
     public void onCreate() {
@@ -58,4 +79,8 @@ public class Guest {
     public void setRole(String role) { this.role = role; }
 
     public Instant getCreatedAt() { return createdAt; }
+
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
+    }
 }

@@ -1,7 +1,13 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
 import java.time.Instant;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "key_share_requests")
@@ -24,6 +30,19 @@ public class KeyShareRequest {
     private Instant shareEnd;
 
     private String status;
+
+    public KeyShareRequest(DigitalKey digitalKey, Long id, Instant shareEnd, Instant shareStart, Guest sharedBy, Guest sharedWith, String status) {
+        this.digitalKey = digitalKey;
+        this.id = id;
+        this.shareEnd = shareEnd;
+        this.shareStart = shareStart;
+        this.sharedBy = sharedBy;
+        this.sharedWith = sharedWith;
+        this.status = status;
+    }
+
+    public KeyShareRequest() {
+    }
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

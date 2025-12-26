@@ -19,6 +19,17 @@ public class DigitalKey {
     private Instant expiresAt;
     private Boolean active = true;
 
+    public DigitalKey(RoomBooking booking, Instant expiresAt, Long id, Instant issuedAt, String keyValue) {
+        this.booking = booking;
+        this.expiresAt = expiresAt;
+        this.id = id;
+        this.issuedAt = issuedAt;
+        this.keyValue = keyValue;
+    }
+
+    public DigitalKey() {
+    }
+
     public Long getId() { return id; }
     public RoomBooking getBooking() { return booking; }
     public void setBooking(RoomBooking booking) { this.booking = booking; }
@@ -30,4 +41,8 @@ public class DigitalKey {
     public void setExpiresAt(Instant expiresAt) { this.expiresAt = expiresAt; }
     public Boolean getActive() { return active; }
     public void setActive(Boolean active) { this.active = active; }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
