@@ -1,0 +1,52 @@
+package com.example.demo.controller;
+
+import com.example.demo.model.Guest;
+import com.example.demo.security.JwtTokenProvider;
+import com.example.demo.service.GuestService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
+
+@RestController
+@RequestMapping("/auth")
+public class AuthController {
+
+    private final GuestService guestService;
+    private final AuthenticationManager authenticationManager;
+    private final JwtTokenProvider jwtTokenProvider;
+
+    public AuthController(
+            GuestService guestService,
+            AuthenticationManager authenticationManager,
+            JwtTokenProvider jwtTokenProvider) {
+        this.guestService = guestService;
+        this.authenticationManager = authenticationManager;
+        this.jwtTokenProvider = jwtTokenProvider;
+    }
+
+    // ✅ REGISTER
+    @PostMapping("/register")
+    public ResponseEntity<Guest> register(@RequestBody Guest guest) {
+        return ResponseEntity.ok(guestService.createGuest(guest));
+    }
+
+    // ✅ LOGIN
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody Map<String, String> request) {
+
+        Authentication authentication =
+                authenticationManager.authenticate(
+                        new UsernamePasswordAuthenticationToken(
+                                request.get("email"),
+                                request.get("password")
+                        )
+                );
+
+        String token = jwtTokenProvider.generateToken(authentication);
+        return ResponseEntity.ok(Map.of("token", token));
+    }
+}
