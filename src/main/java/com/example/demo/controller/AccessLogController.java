@@ -29,3 +29,4 @@ public class AccessLogController {
         return service.getLogsForGuest(guestId);
     }
 }
+ok then call chatgpt here for further details
