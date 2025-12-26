@@ -18,7 +18,8 @@ public class Guest {
 
     @Column(nullable = false, unique = true)
     private String email;
-
+    @Column(nullable=false)
+    private String password;
     private String phoneNumber;
 
     private Boolean verified = false;
@@ -39,6 +40,9 @@ public class Guest {
     public void setFullName(String fullName) { this.fullName = fullName; }
 
     public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
+    public String getPassword() { return password; }
     public void setEmail(String email) { this.email = email; }
 
     public String getPhoneNumber() { return phoneNumber; }
