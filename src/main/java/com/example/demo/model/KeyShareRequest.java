@@ -1,7 +1,7 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Entity
 @Table(name = "key_share_requests")
@@ -20,21 +20,29 @@ public class KeyShareRequest {
     @ManyToOne
     private Guest sharedWith;
 
-    private LocalDateTime shareStart;
-    private LocalDateTime shareEnd;
+    private Instant shareStart;
+    private Instant shareEnd;
+
     private String status;
 
     public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
     public DigitalKey getDigitalKey() { return digitalKey; }
     public void setDigitalKey(DigitalKey digitalKey) { this.digitalKey = digitalKey; }
+
     public Guest getSharedBy() { return sharedBy; }
     public void setSharedBy(Guest sharedBy) { this.sharedBy = sharedBy; }
+
     public Guest getSharedWith() { return sharedWith; }
     public void setSharedWith(Guest sharedWith) { this.sharedWith = sharedWith; }
-    public LocalDateTime getShareStart() { return shareStart; }
-    public void setShareStart(LocalDateTime shareStart) { this.shareStart = shareStart; }
-    public LocalDateTime getShareEnd() { return shareEnd; }
-    public void setShareEnd(LocalDateTime shareEnd) { this.shareEnd = shareEnd; }
+
+    public Instant getShareStart() { return shareStart; }
+    public void setShareStart(Instant shareStart) { this.shareStart = shareStart; }
+
+    public Instant getShareEnd() { return shareEnd; }
+    public void setShareEnd(Instant shareEnd) { this.shareEnd = shareEnd; }
+
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
 }
