@@ -47,12 +47,10 @@ public class AccessLogServiceImpl implements AccessLogService {
 
         boolean allowed = false;
 
-        // Owner access
         if (key.getBooking().getGuest().getId().equals(guest.getId())) {
             allowed = true;
         }
 
-        // Shared access
         if (!allowed) {
             List<KeyShareRequest> shares =
                     keyShareRequestRepository.findBySharedWithId(guest.getId());
@@ -68,7 +66,7 @@ public class AccessLogServiceImpl implements AccessLogService {
             }
         }
 
-        // Key validity
+    
         if (!key.getActive()
                 || Instant.now().isBefore(key.getIssuedAt())
                 || Instant.now().isAfter(key.getExpiresAt())) {
