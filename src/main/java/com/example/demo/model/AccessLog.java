@@ -21,6 +21,18 @@
         private String result;
         private String reason;
 
+    public AccessLog(Instant accessTime, DigitalKey digitalKey, Guest guest, Long id, String reason, String result) {
+        this.accessTime = accessTime;
+        this.digitalKey = digitalKey;
+        this.guest = guest;
+        this.id = id;
+        this.reason = reason;
+        this.result = result;
+    }
+
+    public AccessLog() {
+    }
+
         public Long getId() { return id; }
         public void setId(Long id){
         this.id = id;
