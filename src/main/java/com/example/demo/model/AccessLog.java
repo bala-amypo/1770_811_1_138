@@ -6,7 +6,7 @@
     @Entity
     @Table(name = "access_logs")
     public class AccessLog {
-
+        
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
