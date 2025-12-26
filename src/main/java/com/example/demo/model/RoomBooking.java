@@ -22,6 +22,8 @@ public class RoomBooking {
 
     private Boolean active = true;
     @ManytoMany 
+    @JoinTable(
+    name = "roommates_booking",)
     private Set<Guest> roommates = new Hashset<>()
 
     public Long getId() { return id; }
