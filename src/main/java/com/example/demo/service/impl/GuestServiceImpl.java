@@ -61,4 +61,14 @@ public class GuestServiceImpl implements GuestService {
         guest.setActive(false);
         guestRepository.save(guest);
     }
+    @Override
+    public Guest getGuestByEmail(String email) {
+        return guestRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Guest not found"));
+    }
+
+    @Override
+    public boolean matchesPassword(String raw, String encoded) {
+        return passwordEncoder.matches(raw, encoded);
+    }
 }

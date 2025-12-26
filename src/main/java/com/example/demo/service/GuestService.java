@@ -14,4 +14,7 @@ public interface GuestService {
     Guest updateGuest(Long id, Guest guest);
 
     void deactivateGuest(Long id);
+    Guest getGuestByEmail(String email);
+
+    boolean matchesPassword(String raw, String encoded);
 }
