@@ -47,6 +47,7 @@ public class GuestServiceImpl implements GuestService {
         Guest existing = getGuestById(id);
 
         existing.setFullName(guest.getFullName());
+        existing.setEmail(guest.getEmail());
         existing.setPhoneNumber(guest.getPhoneNumber());
         existing.setVerified(guest.getVerified());
         existing.setActive(guest.getActive());
