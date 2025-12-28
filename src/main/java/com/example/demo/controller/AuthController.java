@@ -3,8 +3,12 @@ package com.example.demo.controller;
 import com.example.demo.dto.LoginRequest;
 import com.example.demo.dto.RegisterRequest;
 import com.example.demo.model.Guest;
+import com.example.demo.security.JwtTokenProvider;
 import com.example.demo.service.GuestService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -12,10 +16,19 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final GuestService guestService;
+    private final AuthenticationManager authenticationManager;
+    private final JwtTokenProvider jwtTokenProvider;
 
-    public AuthController(GuestService guestService) {
+    public AuthController(
+            GuestService guestService,
+            AuthenticationManager authenticationManager,
+            JwtTokenProvider jwtTokenProvider) {
+
         this.guestService = guestService;
+        this.authenticationManager = authenticationManager;
+        this.jwtTokenProvider = jwtTokenProvider;
     }
+
     @PostMapping("/register")
     public ResponseEntity<Guest> register(@RequestBody RegisterRequest request) {
 
@@ -29,14 +42,21 @@ public class AuthController {
         Guest saved = guestService.createGuest(guest);
         return ResponseEntity.ok(saved);
     }
+
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest request) {
-        Guest guest = guestService.getGuestByEmail(request.getEmail());
 
-        if (!guestService.matchesPassword(request.getPassword(), guest.getPassword())) {
-            return ResponseEntity.badRequest().body("Invalid credentials");
-        }
+        // 🔐 Authenticate using Spring Security
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.getEmail(),
+                        request.getPassword()
+                )
+        );
 
-        return ResponseEntity.ok("Login successful");
+        // 🔑 Generate token using Authentication object
+        String token = jwtTokenProvider.generateToken(authentication);
+
+        return ResponseEntity.ok(token);
     }
 }
